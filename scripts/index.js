@@ -2,27 +2,43 @@
 const templateCard = document.querySelector('#card-template'); // Выбор Template
 // @todo: DOM узлы
 const list = document.querySelector('.places__list'); // Выбор элемента ul листа 
-const places__item = templateCard.content.querySelector('.places__item'); // выбор Элемент tempalte. li
-const nameCard = templateCard.content.querySelector('.card__title'); //выбор Card Title в li
-const img = templateCard.content.querySelector('.card__image'); // выбор img
+const placesItem = templateCard.content.querySelector('.places__item'); // выбор Элемент tempalte. li
 // @todo: Функция создания карточки
-function addCards (){
-    initialCards.forEach(function (initialCard) {
-        nameCard.textContent = initialCard.name;
-        img.src = initialCard.link;
-        img.alt = initialCard.alt;
-        let cloneCardPattern = places__item.cloneNode(true);
-        list.appendChild(cloneCardPattern);
-// @todo: Функция удаления карточки
-        const buttonsDell = document.querySelectorAll('.card__delete-button');// выбор кнопок удаления
-        function delitecard (e){
-          const currentButton =e.currentTarget;
-          currentButton.parentElement.remove();
-          }
-          buttonsDell.forEach(button => {
-            button.addEventListener('click', delitecard)
-          })
-    })
-    }
+function createCard(initialCard) {
+  const card = placesItem.cloneNode(true);// создаем клон заготовки в перемунную card
+  const cardTitle = card.querySelector('.card__title');//выбираем в заготовке title
+  const cardImage = card.querySelector('.card__image');// Выбираем в заготовке img
+  
+  cardTitle.textContent = initialCard.name;
+  cardImage.src = initialCard.link;
+  cardImage.alt = initialCard.alt;
+
+  // @todo: Функция удаления карточки
+  const deleteButton = card.querySelector('.card__delete-button');// выбираем кнопки удаления карточки
+
+  deleteButton.addEventListener('click', function() {// Добавляет слушатель на карту.
+      card.remove();
+  });
+  
+  return card;
+}
 // @todo: Вывести карточки на страницу
-addCards ();
+
+function addCards() {
+    initialCards.forEach(function(initialCard) {
+        const newCard = createCard(initialCard);
+        list.appendChild(newCard);
+    });
+}
+addCards();
+
+
+
+
+
+
+
+
+
+
+
