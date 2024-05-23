@@ -80,4 +80,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
   addInitialCards(); 
 });
-//////////change for git
