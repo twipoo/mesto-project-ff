@@ -12,3 +12,5 @@ export function getUserInfo (){
     console.log(result);
   });
 }
+
+

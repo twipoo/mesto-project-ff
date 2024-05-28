@@ -1,10 +1,11 @@
 import {getUserInfo} from '../components/api.js';
-import { initialCards } from '../components/cards.js'; // массив исходных карточек 
+import { initialCards, getCardsFromServer } from '../components/cards.js'; // массив исходных карточек 
 import '../pages/index.css'; // css 
 import { createCard, handleLikeClick, handleDeleteCard } from '../components/card.js'; 
 import { openModal, closeModal, closePopupByOverlay } from '../components/modal.js';
 
 getUserInfo();
+getCardsFromServer();
 
 document.addEventListener('DOMContentLoaded', () => { 
   const popupEditProfile = document.querySelector('.popup_type_edit'); 

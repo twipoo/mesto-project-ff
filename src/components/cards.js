@@ -30,3 +30,17 @@ export const initialCards = [
       alt: "Скалистый берег Байкала зимой",
     }
 ];
+
+
+
+export function getCardsFromServer (){
+  return fetch('https://nomoreparties.co/v1/cohortId/cards', {
+headers: {
+  authorization: '2b1d046a-7a38-44ae-adc1-5d0abf366ad9'
+}
+})
+.then(res => res.json())
+.then((result) => {
+  console.log(result);
+});
+}
