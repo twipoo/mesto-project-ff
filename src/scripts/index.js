@@ -18,7 +18,7 @@ import {
 import {
   getCardsInfo,
   getUserData,
-  sandUserData,
+  sendUserData,
   createNewCardsOnServer,
   updateAvatar,
 } from "../components/api.js";
@@ -89,8 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButtonChangeAvatar.textContent = 'Сохранить'; // Возвращаем текст кнопки
       });
   });
-  
-  
 
   profileEditButton.addEventListener("click", () => {
     nameInput.value = profileName.textContent;
@@ -103,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
   formEditProfile.addEventListener("submit", (evt) => {
     evt.preventDefault();
     submitButtonEditProfile.textContent = "Сохранение..."; // Изменяем текст кнопки
-    sandUserData()
+    sendUserData(nameInput.value, jobInput.value)
       .then(() => {
         profileName.textContent = nameInput.value;
         profileDescription.textContent = jobInput.value;
@@ -131,10 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const newCardData = {
       name: placeNameInput.value,
       link: placeLinkInput.value,
-      alt: placeNameInput.value,
     };
     
-    createNewCardsOnServer(newCardData)
+    createNewCardsOnServer(newCardData.name, newCardData.link)
       .then((cardData) => {
         const newCard = createCard(cardData, userId, handleImageClick, handleDeleteCard, handleLikeClick);
         list.prepend(newCard);
