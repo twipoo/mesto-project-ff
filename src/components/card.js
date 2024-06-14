@@ -1,5 +1,4 @@
-import { openModal, closeModal } from './modal.js'; // Добавляем импорт
-import { likeCard, unlikeCard } from './api.js'; // Импортируем новые функции
+import { likeCard, unlikeCard } from './api.js'; // Импортируем функции для лайков
 
 export function createCard(newCardData, userId, handleImageClick, handleDeleteCard, handleLikeClick) {
   const templateCard = document.querySelector('#card-template');
@@ -52,29 +51,4 @@ export function handleLikeClick(likeButton, cardId, likesCount) {
         console.error('Ошибка при добавлении лайка:', error);
       });
   }
-}
-
-export function handleDeleteCard(card, cardId) {
-  const popupDeleteCard = document.querySelector('.popup_type_delete-card');
-  openModal(popupDeleteCard);
-  
-  const confirmButton = popupDeleteCard.querySelector('.popup__button_confirm');
-  confirmButton.addEventListener('click', () => {
-    fetch(`https://nomoreparties.co/v1/wff-cohort-15/cards/${cardId}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: '2b1d046a-7a38-44ae-adc1-5d0abf366ad9',
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      card.remove();
-      closeModal(popupDeleteCard);
-    })
-    .catch(error => {
-      console.error('Ошибка при удалении карточки:', error);
-    });
-  });
 }
