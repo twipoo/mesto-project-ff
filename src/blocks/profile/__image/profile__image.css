@@ -8,6 +8,7 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+  cursor: pointer;
 }
 
 .profile__image::after {
@@ -52,7 +53,8 @@
   width: 24px;
   height: 24px;
   display: none;
-  padding-right: 30px
+  padding-right: 30px;
+  cursor: pointer;
 }
 
 .profile__avatar-container:hover .profile__avatar-edit-icon {

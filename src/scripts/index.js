@@ -58,6 +58,12 @@ import { validationConfig } from "../components/validationConfig.js";
 
   const confirmButton = popupDeleteCard.querySelector('.popup__button_confirm');
 
+  avatarEditIcon.addEventListener("click", () => {
+    openModal(popupChangeAvatar);
+    formChangeAvatar.reset();
+    clearValidation(formChangeAvatar, validationConfig);
+  });
+
 
   profileAvatar.addEventListener("click", () => {
     openModal(popupChangeAvatar);
