@@ -15,21 +15,11 @@ const hideInputError = (formElement, inputElement, config) => {
 const checkInputValidity = (formElement, inputElement, config) => {
   let errorMessage = '';
 
-  // Проверка на пустое значение
-  if (inputElement.validity.valueMissing) {
-    errorMessage = inputElement.validationMessage;
-  }
-  // Проверка на минимальную длину
-  else if (inputElement.validity.tooShort) {
-    errorMessage = `Минимальная длина этого поля ${inputElement.minLength} символа`;
-  }
-  // Проверка на максимальную длину
-  else if (inputElement.validity.tooLong) {
-    errorMessage = `Максимальная длина этого поля ${inputElement.maxLength} символов`;
-  }
   // Проверка на соответствие паттерну
-  else if (inputElement.validity.patternMismatch) {
+  if (inputElement.validity.patternMismatch) {
     errorMessage = inputElement.dataset.errorMessage || inputElement.validationMessage;
+  } else {
+    errorMessage = inputElement.validationMessage; // Используем стандартное сообщение об ошибке браузера
   }
 
   if (errorMessage) {
@@ -71,9 +61,6 @@ const setEventListeners = (formElement, config) => {
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
     setEventListeners(formElement, config);
   });
 };
